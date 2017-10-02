@@ -38,5 +38,5 @@ Examples:
   exp-deploy --env production
   exp-deploy --env staging
 
-For more information go to https://github.com/preposterous/exp-depoloy-cli
+For more information go to https://github.com/preposterous/exp-deploy-cli
 ```
