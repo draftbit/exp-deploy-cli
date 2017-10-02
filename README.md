@@ -1,7 +1,7 @@
 # exp-deploy-cli
 
-[![Build Status](https://travis-ci.org/preposterous/exp-deploy.svg?branch=master)](https://travis-ci.org/preposterous/exp-deploy)
-[![NPM Version](https://badge.fury.io/js/exp-deploy.svg)](https://badge.fury.io/js/exp-deploy)
+[![Build Status](https://travis-ci.org/preposterous/exp-deploy-cli.svg?branch=master)](https://travis-ci.org/preposterous/exp-deploy-cli)
+[![NPM Version](https://badge.fury.io/js/exp-deploy-cli.svg)](https://badge.fury.io/js/exp-deploy-cli)
 
 ## Features
 - Automated deployments of Expo (React Native) projects
