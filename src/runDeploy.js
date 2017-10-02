@@ -1,8 +1,10 @@
 const { promisify } = require('util');
-const exec = require('child_process').exec;
+const { exec, spawn } = require('child_process');
 const ncp = require('ncp');
+
 const copyAsync = promisify(ncp);
-const execAsync = promisify(exec)
+const execAsync = promisify(exec);
+const spawnAsync = promisify(spawn);
 
 async function runDeploy (options, cwd) {
   const { env } = options
@@ -11,10 +13,19 @@ async function runDeploy (options, cwd) {
   const fileToCopy = `./config/exp-${env}.json`;
 
   await copyAsync(fileToCopy, appJson)
-  const {err, stdout, stderr} = await execAsync('exp publish')
-  console.log('err', err)
-  console.log('stdout', stdout)
-  console.log('stderr', stderr)
+  const runExpPublish = spawn('exp publish')
+
+  runExpPublish.stdout.on('data', function (data) {
+    console.log('stdout: ' + data.toString());
+  });
+
+  runExpPublish.stderr.on('data', function (data) {
+    console.log('stderr: ' + data.toString());
+  });
+
+  runExpPublish.on('exit', function (code) {
+    console.log('child process exited with code ' + code.toString());
+  });
 }
 
 module.exports = runDeploy
