@@ -20,6 +20,12 @@
     "sentryApiKey": "xyz"
   },
   "expo": {
+    "name": "MyAppName",
+    "privacy": "unlisted",
+    "slug": "my-app-name",
+    "sdkVersion": "1.0.0",
+    "scheme": "my-app-name",
+    "version": "1.0.0",
   }
   ```
 - Running `exp-deploy --production` will now do the following:
