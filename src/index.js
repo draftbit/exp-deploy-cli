@@ -7,6 +7,12 @@ const subarg = require('subarg');
 const sudoBlock = require('sudo-block');
 const logSymbols = require('log-symbols');
 
+const runConfig = require('./runConfig');
+const runSync = require('./runSync');
+const runDeploy = require('./runDeploy')
+
+const cwd = process.cwd();
+
 const options = {
   flags: {
     environment: {
@@ -14,17 +20,13 @@ const options = {
       alias: 'env',
       default: 'development'
     },
-    directory:  {
+    directory: {
       type: 'string',
       alias: 'dir',
       default: './config'
     }
   },
-  input: [
-    'config',
-    'releases',
-    'rollback'
-  ]
+  input: ['config', 'releases', 'rollback', 'sync']
 };
 
 const cli = meow(
@@ -33,25 +35,31 @@ const cli = meow(
       $ exp-deploy <input>
 
 	Options
-      --env, -r environment
+      --env, --environment
+      --dir, --directory
+      --v, --version
 
 	Examples
+      $ exp-deploy --production
       $ exp-deploy config
       $ exp-deploy releases
       $ exp-deploy rollback --env production v1.2.4
+      $ exp-deploy sync
 `,
   options
 );
 
 function init(args, options) {
-  if (args.length === 0) {
+  if (args.length === 0 && !options.production && !options.development) {
     cli.showHelp(1);
   }
 
-  console.log('args', args)
-  console.log('options', options)
+  if (args.length === 0) {
+    return runDeploy(options, cwd);
+  }
 
-  const nonGroupedArgs = args.filter(x => !x._);
+  if (args[0] === 'config') return runConfig(options, cwd);
+  if (args[0] === 'sync') return runSync(options, cwd);
 }
 
 sudoBlock();
