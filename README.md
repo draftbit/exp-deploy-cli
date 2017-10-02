@@ -64,6 +64,12 @@ Examples:
 For more information go to https://github.com/preposterous/exp-deploy-cli
 ```
 
+## Api
+- `exp config`
+- `exp deploy`
+- `exp releases`
+- `exp rollback`
+
 ## Philosophy /  Idea
 - exp doesn't support dev. vs prod environments so lets try and make it work on our own
 - create a `config` folder and place `exp-development.json` and `exp-production.json`

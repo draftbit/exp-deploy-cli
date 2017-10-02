@@ -29,7 +29,7 @@ async function copyAppJsonToConfig() {
 
   const appJson = process.cwd() + '/app.json';
   const expDev = './config/exp-development.json';
-  const expProd = './config/exp-prroduction.json';
+  const expProd = './config/exp-production.json';
 
   try {
     await copyAsync(appJson, expDev);
