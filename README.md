@@ -9,7 +9,24 @@
 - Release History
   - Rollback to an old version via git tags
 
-## Install
+## Instructions
+- `exp-deploy` requires a `config` folder with a copy of `app.json`. Create the following:
+  - `config/exp-development.json`
+  - `config/exp-production.json`
+- If  you'd like to store environment variables, create a `config` object next to `expo` within `app.json`:
+  ```json
+  "config": {
+    "apiUrl": "https://api.mysite.com",
+    "sentryApiKey": "xyz"
+  },
+  "expo": {
+  }
+  ```
+- Running `exp-deploy --production` will now do the following:
+  - copy `config/exp-production.json` over into `app.json`
+  - ask you if the values look correct
+  - run `exp publish`
+  - reset app.json to the previous state
 
 ```sh
 yarn global add exp-deploy-cli
