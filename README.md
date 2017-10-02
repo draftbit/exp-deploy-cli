@@ -1,7 +1,7 @@
 # exp-deploy-cli
 
 [![Build Status](https://travis-ci.org/preposterous/exp-deploy-cli.svg?branch=master)](https://travis-ci.org/preposterous/exp-deploy-cli)
-[![NPM Version](https://badge.fury.io/js/exp-deploy-cli.svg)](https://badge.fury.io/js/exp-deploy-cli)
+[![npm version](https://badge.fury.io/js/exp-deploy-cli.svg)](https://badge.fury.io/js/exp-deploy-cli)
 
 ## Features
 - Automated deployments of Expo (React Native) projects
@@ -40,3 +40,25 @@ Examples:
 
 For more information go to https://github.com/preposterous/exp-deploy-cli
 ```
+
+## Philosophy /  Idea
+- exp doesn't support dev. vs prod environments so lets try and make it work on our own
+- create a `config` folder and place `exp-development.json` and `exp-production.json`
+- within your `app.json` create a `config` object to store your api keys, etc. in
+- run `exp-deploy config` which will:
+  - run interactive shell
+  - check for `config` folder. If doesn't exist, create it
+  - copy over `app.json` into `exp-development.json` and `exp-production.json`
+  - ask user for any specific api keys they would like to separate
+- run `exp-deploy --production` which will:
+  - check whether config/exp-production.json exists
+  - copy it over into your main app.json
+  - bumps the version number (or npm version patch) by default
+  - save the version number, commit it including creating a tag
+  - save the release into a `releases.json` file
+- run `exp-deploy releases` which will:
+  - look up `releases.json` with every released version
+    - ties in git tag / release to what's been deployed
+- run `exp-deploy rollback` which will:
+  - look into `releases.json` and asks you interactively to choose a version to roll back to
+  - will check out the git tag and roll back your deploy to that specific version

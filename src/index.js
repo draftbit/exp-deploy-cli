@@ -13,6 +13,11 @@ const options = {
       type: 'string',
       alias: 'env',
       default: 'development'
+    },
+    directory:  {
+      type: 'string',
+      alias: 'dir',
+      default: './config'
     }
   },
   input: [
