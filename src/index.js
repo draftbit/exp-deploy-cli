@@ -40,26 +40,27 @@ const cli = meow(
       --v, --version
 
 	Examples
-      $ exp-deploy --production
+      $ exp-deploy --env production
+      $ exp-deploy --env staging
       $ exp-deploy config
-      $ exp-deploy releases
-      $ exp-deploy rollback --env production v1.2.4
       $ exp-deploy sync
 `,
   options
 );
 
 function init(args, options) {
-  if (args.length === 0 && !options.production && !options.development) {
+  if (args.length === 0 && !options.env) {
     cli.showHelp(1);
   }
 
-  if (args.length === 0) {
+  if (args.length === 0 && options.env) {
     return runDeploy(options, cwd);
   }
 
-  if (args[0] === 'config') return runConfig(options, cwd);
-  if (args[0] === 'sync') return runSync(options, cwd);
+  const cmd = args[0]
+
+  if (cmd === 'config') return runConfig(options, cwd);
+  if (cmd === 'sync') return runSync(options, cwd);
 }
 
 sudoBlock();

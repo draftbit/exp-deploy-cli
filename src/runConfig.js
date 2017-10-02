@@ -5,7 +5,6 @@ const fs = require('fs');
 const jsonFile = require('jsonfile');
 const mkdirp = require('mkdirp');
 const ncp = require('ncp');
-
 const copyAsync = promisify(ncp);
 
 const CONFIG_FIELDS = ['name', 'privacy', 'slug', 'scheme', 'version'];
