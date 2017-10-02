@@ -11,7 +11,7 @@ async function runDeploy (options, cwd) {
   const fileToCopy = `./config/exp-${env}.json`;
 
   await copyAsync(fileToCopy, appJson)
-  const {err, stdout, stderr} = await('exp publish')
+  const {err, stdout, stderr} = await exec('exp publish')
   console.log('err', err)
   console.log('stdout', stdout)
   console.log('stderr', stderr)
