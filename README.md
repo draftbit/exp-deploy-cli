@@ -1,7 +1,11 @@
-# exp-deploy-cli
+# exp-deploy-cli (work in progress)
 
 [![npm version](https://badge.fury.io/js/exp-deploy-cli.svg)](https://badge.fury.io/js/exp-deploy-cli)
 [![Build Status](https://travis-ci.org/preposterous/exp-deploy-cli.svg?branch=master)](https://travis-ci.org/preposterous/exp-deploy-cli)
+
+## About
+
+exp-deploy-cli is a helper CLI until `Expo` releases their own mutli-environment tool! 
 
 ## Features
 - Automated deployments of Expo (React Native) projects
