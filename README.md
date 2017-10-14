@@ -1,17 +1,10 @@
 # exp-deploy-cli (work in progress)
 
 [![npm version](https://badge.fury.io/js/exp-deploy-cli.svg)](https://badge.fury.io/js/exp-deploy-cli)
-[![Build Status](https://travis-ci.org/preposterous/exp-deploy-cli.svg?branch=master)](https://travis-ci.org/preposterous/exp-deploy-cli)
 
 ## About
 
-exp-deploy-cli is a helper CLI until `Expo` releases their own mutli-environment tool! 
-
-## Features
-- Automated deployments of Expo (React Native) projects
-- Multi-environment app.json support
-- Release History
-  - Rollback to an old version via git tags
+`exp-deploy-cli` is an easy way to deploy your Expo app to multiple environments until Expo releases their own tool.
 
 ## Instructions
 - `exp-deploy` requires a `config` folder with a copy of `app.json`. Create the following:
@@ -34,9 +27,8 @@ exp-deploy-cli is a helper CLI until `Expo` releases their own mutli-environment
   ```
 - Running `exp-deploy --production` will now do the following:
   - copy `config/exp-production.json` over into `app.json`
-  - ask you if the values look correct
   - run `exp publish`
-  - reset app.json to the previous state
+  - reset app.json to its previous state
 
 ```sh
 yarn global add exp-deploy-cli
@@ -53,22 +45,17 @@ Usage: exp-deploy [command]
 
 Commands:
   config                   Initial Config Setup
-  deploy <env>             Deploy to specific environment [staging, production]
-  releases                 See a list of past releases
-  rollback <env> <version> Rollback to a specific version
 
 Options:
-  --help  Show help                                                    [boolean]
+  --help  Show help        [boolean]
 
 Examples:
   exp-deploy config
   exp-deploy --env production
   exp-deploy --env staging
-
-For more information go to https://github.com/preposterous/exp-deploy-cli
 ```
 
-## Api
+## Future Api
 - `exp config`
 - `exp deploy`
 - `exp releases`
