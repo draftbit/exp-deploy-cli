@@ -1,31 +1,41 @@
+'use strict'
+
+const chalk = require('chalk');
 const exec = require('child_process').exec;
 const { promisify } = require('util');
 const fs = require('fs');
-
 const jsonFile = require('jsonfile');
 const mkdirp = require('mkdirp');
 const ncp = require('ncp');
+
 const copyAsync = promisify(ncp);
+const log = console.log;
 
 const CONFIG_FIELDS = ['name', 'privacy', 'slug', 'scheme', 'version'];
 
 function parseAppJson() {
-  console.log('parsing app.json');
   const file = jsonFile.readFileSync('app.json');
   const { expo } = file;
-  console.log('Current Values:');
-  console.log('name', expo.name);
-  console.log('privacy', expo.privacy);
-  console.log('slug', expo.slug);
-  console.log('scheme', expo.scheme);
-  console.log('version', expo.version);
-  console.log('-------------');
+
+  log(chalk.blue(''))
+  log('name:', chalk.yellow(expo.name));
+  log('privacy:', chalk.yellow(expo.privacy));
+  log('slug:', chalk.yellow(expo.slug));
+  log('scheme:', chalk.yellow(expo.scheme));
+  log('version:', chalk.yellow(expo.version));
+  log(chalk.blue(''))
 
   copyAppJsonToConfig(file);
 }
 
 async function copyAppJsonToConfig() {
-  console.log('copying over...');
+  log(chalk.blue('============================================='))
+  log(chalk.green('[exp-deploy config]: Copying app.json into: '))
+  log(chalk.blue('============================================='))
+  log(chalk.blue(''))
+  log(chalk.yellow('./config/exp-development.json'))
+  log(chalk.yellow('./config/exp-production.json'))
+  log(chalk.blue(''))
 
   const appJson = process.cwd() + '/app.json';
   const expDev = './config/exp-development.json';
@@ -34,19 +44,23 @@ async function copyAppJsonToConfig() {
   try {
     await copyAsync(appJson, expDev);
     await copyAsync(appJson, expProd);
+  log(chalk.green('All done! Check your config folder'))
   } catch (err) {
-    console.log('err copying files', err);
+    log(chalk.red('Copying files failed: ', err))
+    process.exitCode = 1
+    return
   }
 }
 
 function runConfig(options, cwd) {
-  console.log('running config', options, cwd);
+  log(chalk.blue('============================================='))
   if (fs.existsSync(cwd + '/config')) {
-    console.log('config folder exists');
+    log(chalk.green('[exp-deploy config]: config folder exists'))
   } else {
-    console.log('config folder doesnt exist, creating...');
+    log(chalk.red(`[exp-deploy config]: creating config folder`))
     mkdirp('./config');
   }
+  log(chalk.blue('============================================='))
 
   parseAppJson();
 }

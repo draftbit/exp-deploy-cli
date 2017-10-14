@@ -1,34 +1,38 @@
 {
   "name": "exp-deploy-cli",
   "version": "1.0.5",
-  "description": "An easy way to deploy multi-stream apps using Expo & exp",
+  "description": "An easy way to deploy different environment configurations using Expo & exp CLI",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "format": "prettier ./src/*"
   },
   "keywords": [
     "expo",
-    "cli"
+    "cli",
+    "deployment",
+    "environment"
   ],
   "bin": {
     "exp-deploy": "src/index.js"
   },
   "engines": {
-    "node": ">=7"
+    "node": ">=8"
   },
   "author": "Peter Piekarczyk <peter@orchard.ai>",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^21.2.1"
+    "jest": "^21.2.1",
+    "prettier": "^1.7.3"
   },
   "dependencies": {
     "@expo/spawn-async": "^1.3.0",
+    "chalk": "^2.1.0",
     "jsonfile": "^4.0.0",
     "log-symbols": "^2.1.0",
     "meow": "^3.7.0",
     "ncp": "^2.0.0",
     "ora": "^1.3.0",
-    "prettier": "^1.7.3",
     "subarg": "^1.0.0",
     "sudo-block": "^2.0.0",
     "update-notifier": "^2.2.0"

@@ -19,10 +19,11 @@ async function runDeploy(options, cwd) {
   spinner.text = `Copying files over for ${env}`
   const appJson = cwd + '/app.json'
   const fileToCopy = `./config/exp-${env}.json`;
-
   await copyAsync(fileToCopy, appJson);
+
   spinner.text = 'Running exp publish'
   let expResponse = await spawnAsync('exp', ['publish']);
+
   spinner.text = `Resetting app.json`
   let gitResponse = await spawnAsync('git', ['checkout', 'app.json'])
   spinner.succeed();
