@@ -1,4 +1,4 @@
-# exp-deploy-cli (work in progress)
+# exp-deploy-cli
 
 [![npm version](https://badge.fury.io/js/exp-deploy-cli.svg)](https://badge.fury.io/js/exp-deploy-cli)
 
