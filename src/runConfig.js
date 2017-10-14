@@ -44,7 +44,8 @@ async function copyAppJsonToConfig() {
   try {
     await copyAsync(appJson, expDev);
     await copyAsync(appJson, expProd);
-  log(chalk.green('All done! Check your config folder'))
+    log(chalk.green('All done! Check your config folder'))
+    process.exit(0)
   } catch (err) {
     log(chalk.red('Copying files failed: ', err))
     process.exitCode = 1
