@@ -7,6 +7,11 @@ const fs = require('fs');
 const jsonFile = require('jsonfile');
 const mkdirp = require('mkdirp');
 const ncp = require('ncp');
+const Table = require('cli-table');
+
+const table = new Table({
+    head: ['Env', 'Filename', 'Version', 'Name', 'Slug'],
+});
 
 const copyAsync = promisify(ncp);
 const log = console.log;
@@ -16,33 +21,36 @@ const CONFIG_FIELDS = ['name', 'privacy', 'slug', 'scheme', 'version'];
 function parseAppJson() {
   const file = jsonFile.readFileSync('app.json');
   const { expo } = file;
-
-  log(chalk.blue(''))
-  log('name:', chalk.yellow(expo.name));
-  log('privacy:', chalk.yellow(expo.privacy));
-  log('slug:', chalk.yellow(expo.slug));
-  log('scheme:', chalk.yellow(expo.scheme));
-  log('version:', chalk.yellow(expo.version));
-  log(chalk.blue(''))
-
   copyAppJsonToConfig(file);
 }
 
-async function copyAppJsonToConfig() {
-  log(chalk.blue('============================================='))
-  log(chalk.green('[exp-deploy config]: Copying app.json into: '))
-  log(chalk.blue('============================================='))
-  log(chalk.blue(''))
-  log(chalk.yellow('./config/exp-development.json'))
-  log(chalk.yellow('./config/exp-production.json'))
-  log(chalk.blue(''))
-
+async function copyAppJsonToConfig(file) {
   const appJson = process.cwd() + '/app.json';
   const expDev = './config/exp-development.json';
   const expProd = './config/exp-production.json';
 
+  table.push(
+    ['Production', './config/exp-production.json', file.expo.version, file.expo.name, file.expo.slug]
+  )
+
   try {
-    await copyAsync(appJson, expDev);
+    const appJsonDev = Object.assign({}, file)
+
+    appJsonDev.expo.name = file.expo.name + '-staging'
+    appJsonDev.expo.slug = file.expo.slug + '-staging'
+
+    table.push(
+      ['Development', './config/exp-development.json', appJsonDev.expo.version, appJsonDev.expo.name, appJsonDev.expo.slug],
+    );
+
+    console.log(table.toString());
+
+    fs.writeFileSync(
+      './config/exp-development.json',
+      JSON.stringify(appJsonDev, null, 2),
+      'utf-8'
+    );
+
     await copyAsync(appJson, expProd);
     log(chalk.green('All done! Check your config folder'))
     process.exit(0)
@@ -54,14 +62,12 @@ async function copyAppJsonToConfig() {
 }
 
 function runConfig(options, cwd) {
-  log(chalk.blue('============================================='))
   if (fs.existsSync(cwd + '/config')) {
     log(chalk.green('[exp-deploy config]: config folder exists'))
   } else {
     log(chalk.red(`[exp-deploy config]: creating config folder`))
     mkdirp('./config');
   }
-  log(chalk.blue('============================================='))
 
   parseAppJson();
 }
