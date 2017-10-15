@@ -63,7 +63,7 @@ function init(args, options) {
   }
 
   if (args.length === 0 && options.env) {
-    if (options.env !== 'staging' || options.env !== 'production') {
+    if (options.env !== 'staging' && options.env !== 'production') {
       showEnvError()
       process.exitCode = 1
       return
