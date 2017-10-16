@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const chalk = require('chalk');
 const exec = require('child_process').exec;
@@ -10,7 +10,7 @@ const ncp = require('ncp');
 const Table = require('cli-table');
 
 const table = new Table({
-    head: ['Env', 'Filename', 'Version', 'Name', 'Slug'],
+  head: ['Env', 'Filename', 'Version', 'Name', 'Slug']
 });
 
 const copyAsync = promisify(ncp);
@@ -22,9 +22,9 @@ function parseAppJson() {
   const file = jsonFile.readFileSync('app.json');
 
   if (!file) {
-    log(chalk.red(`[exp-deploy config] Error: app.json doesn't exist`))
-    process.exitCode = 1
-    return
+    log(chalk.red(`[exp-deploy config] Error: app.json doesn't exist`));
+    process.exitCode = 1;
+    return;
   }
 
   const { expo } = file;
@@ -36,19 +36,27 @@ async function copyAppJsonToConfig(file) {
   const expDev = './config/exp-development.json';
   const expProd = './config/exp-production.json';
 
-  table.push(
-    ['Production', './config/exp-production.json', file.expo.version, file.expo.name, file.expo.slug]
-  )
+  table.push([
+    'Production',
+    './config/exp-production.json',
+    file.expo.version,
+    file.expo.name,
+    file.expo.slug
+  ]);
 
   try {
-    const appJsonDev = Object.assign({}, file)
+    const appJsonDev = Object.assign({}, file);
 
-    appJsonDev.expo.name = file.expo.name + '-staging'
-    appJsonDev.expo.slug = file.expo.slug + '-staging'
+    appJsonDev.expo.name = file.expo.name + '-staging';
+    appJsonDev.expo.slug = file.expo.slug + '-staging';
 
-    table.push(
-      ['Development', './config/exp-development.json', appJsonDev.expo.version, appJsonDev.expo.name, appJsonDev.expo.slug],
-    );
+    table.push([
+      'Development',
+      './config/exp-development.json',
+      appJsonDev.expo.version,
+      appJsonDev.expo.name,
+      appJsonDev.expo.slug
+    ]);
 
     console.log(table.toString());
 
@@ -59,20 +67,20 @@ async function copyAppJsonToConfig(file) {
     );
 
     await copyAsync(appJson, expProd);
-    log(chalk.green('[exp-deploy config]: All done! Check your config folder'))
-    process.exit(0)
+    log(chalk.green('[exp-deploy config]: All done! Check your config folder'));
+    process.exit(0);
   } catch (err) {
-    log(chalk.red('Copying files failed: ', err))
-    process.exitCode = 1
-    return
+    log(chalk.red('Copying files failed: ', err));
+    process.exitCode = 1;
+    return;
   }
 }
 
 function runConfig(options, cwd) {
   if (fs.existsSync(cwd + '/config')) {
-    log(chalk.green('[exp-deploy config]: config folder exists'))
+    log(chalk.green('[exp-deploy config]: config folder exists'));
   } else {
-    log(chalk.green(`[exp-deploy config]: creating config folder`))
+    log(chalk.green(`[exp-deploy config]: creating config folder`));
     mkdirp('./config');
   }
 

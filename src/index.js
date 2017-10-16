@@ -5,12 +5,11 @@ const meow = require('meow');
 const updateNotifier = require('update-notifier');
 const subarg = require('subarg');
 const sudoBlock = require('sudo-block');
-const logSymbols = require('log-symbols');
 const chalk = require('chalk');
 
 const runConfig = require('./runConfig');
 const runSync = require('./runSync');
-const runDeploy = require('./runDeploy')
+const runDeploy = require('./runDeploy');
 
 const cwd = process.cwd();
 let log = console.log;
@@ -49,12 +48,12 @@ const cli = meow(
   options
 );
 
-function showEnvError () {
-  log(chalk.blue('======================================================'))
-  log('Oops! Do you mind passing in staging or production?')
-  log(`If you'd like to extend this, feel free to open a PR:`)
-  log('https://github.com/Preposterous/exp-deploy-cli')
-  log(chalk.blue('======================================================'))
+function showEnvError() {
+  log(chalk.blue('======================================================'));
+  log('Oops! Do you mind passing in staging or production?');
+  log(`If you'd like to extend this, feel free to open a PR:`);
+  log('https://github.com/Preposterous/exp-deploy-cli');
+  log(chalk.blue('======================================================'));
 }
 
 function init(args, options) {
@@ -64,9 +63,9 @@ function init(args, options) {
 
   if (args.length === 0 && options.env) {
     if (options.env !== 'staging' && options.env !== 'production') {
-      showEnvError()
-      process.exitCode = 1
-      return
+      showEnvError();
+      process.exitCode = 1;
+      return;
     }
 
     return runDeploy(options, cwd);
