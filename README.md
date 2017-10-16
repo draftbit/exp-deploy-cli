@@ -8,6 +8,8 @@ Right now Expo doesn't support different deploy environments like staging and pr
 
 *Expo is working on supporting their own deployment environments. As soon as its released I'll update the repo to take you there instead*
 
+[Orchard](https://www.orchard.ai) uses this on an daily basis to deploy their different environments
+
 ## Instructions
 - `exp-deploy` requires a `config` folder with a copy of `app.json`. Create the following:
   - `config/exp-development.json`
