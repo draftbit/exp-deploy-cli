@@ -1,12 +1,15 @@
 # exp-deploy-cli
 
 [![npm version](https://badge.fury.io/js/exp-deploy-cli.svg)](https://badge.fury.io/js/exp-deploy-cli)
+[![npm](https://img.shields.io/npm/dt/exp-deploy-cli.svg)](https://www.npmjs.com/package/exp-deploy-cli)
 
 ## About
 
 Right now Expo doesn't support different deploy environments like staging and production. This is a simple tool to help mimic that environment by creating a copy of your `app.json` and adding a suffix to stuff like name and slug.
 
 *Expo is working on supporting their own deployment environments. As soon as its released I'll update the repo to take you there instead*
+
+[Orchard](https://www.orchard.ai) uses this on an daily basis to deploy their different environments
 
 ## Instructions
 - `exp-deploy` requires a `config` folder with a copy of `app.json`. Create the following:
