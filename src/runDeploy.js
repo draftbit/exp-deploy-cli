@@ -4,12 +4,14 @@ const chalk = require('chalk');
 const log = console.log;
 
 async function copyConfigToAppJsonAsync(cwd, env) {
+  log('cwd', cwd);
   const appJson = cwd + '/app.json';
   const fileToCopy = `./config/exp-${env}.json`;
 
   try {
     await copy(fileToCopy, appJson);
   } catch (err) {
+    log('Copy Error: err');
     throw new Error(
       `app.json and/or config don't exist. Are you sure you're in the right directory? Did you run [exp-deploy config] first?`
     );
