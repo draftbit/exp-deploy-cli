@@ -60,6 +60,16 @@ Examples:
   exp-deploy --env staging
 ```
 
+## Using Config Variables in your app
+
+Since Expo doesn't give you access to Config via `Constants.manifest`, you can import the json file directly:
+
+```es6
+import App from './app.json'
+
+const API_URL = App.config.apiUrl
+```
+
 ## Future Api
 - `exp config`
 - `exp deploy`
