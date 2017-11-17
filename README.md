@@ -3,6 +3,12 @@
 [![npm version](https://badge.fury.io/js/exp-deploy-cli.svg)](https://badge.fury.io/js/exp-deploy-cli)
 [![npm](https://img.shields.io/npm/dt/exp-deploy-cli.svg)](https://www.npmjs.com/package/exp-deploy-cli)
 
+## Expo Release Channels 
+
+# [Expo just released (11/17/2017) beta support for Release Channels](https://blog.expo.io/expo-sdk-v23-0-0-is-now-available-be0a8c655414)
+
+We strongly recommend moving forward with Expo's official supported implementation!
+
 ## About
 
 Right now Expo doesn't support different deploy environments like staging and production. This is a simple tool to help mimic that environment by creating a copy of your `app.json` and adding a suffix to stuff like name and slug.
