@@ -1,4 +1,4 @@
-const SYNC_FIELDS = ['name', 'privacy', 'slug', 'scheme', 'version'];
+const SYNC_FIELDS = ['name', 'privacy', 'slug', 'scheme', 'version']
 
 function runSync(options) {
   console.log(`Sync doesn't work yet!`)
@@ -6,4 +6,4 @@ function runSync(options) {
   return
 }
 
-module.exports = runSync;
+module.exports = runSync

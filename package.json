@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "jest",
-    "format": "prettier ./src/*"
+    "format": "prettier ./src/**/*.js --write"
   },
   "keywords": [
     "expo",
@@ -21,9 +21,19 @@
   },
   "author": "Peter Piekarczyk <peter@orchard.ai>",
   "license": "MIT",
+  "prettier": {
+    "bracketSpacing": true,
+    "singleQuote": true,
+    "semi": false,
+    "useTabs": false,
+    "printWidth": 80,
+    "arrowParens": "avoid",
+    "trailingComma": "none",
+    "jsxBracketSameLine": true
+  },
   "devDependencies": {
     "jest": "^21.2.1",
-    "prettier": "^1.7.3"
+    "prettier": "^1.10.1"
   },
   "dependencies": {
     "chalk": "^2.1.0",

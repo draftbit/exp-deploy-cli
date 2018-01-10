@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/exp-deploy-cli.svg)](https://badge.fury.io/js/exp-deploy-cli)
 [![npm](https://img.shields.io/npm/dt/exp-deploy-cli.svg)](https://www.npmjs.com/package/exp-deploy-cli)
 
-## Expo Release Channels 
+## Expo Release Channels
 
 # [Expo just released (11/17/2017) beta support for Release Channels](https://blog.expo.io/expo-sdk-v23-0-0-is-now-available-be0a8c655414)
 
